@@ -42,3 +42,10 @@ function nextimage(){
   document.getElementById("radio"+count).checked = true;
 
 }
+
+const menuToggle = document.getElementById("menuToggle");
+const menuNav = document.getElementById("menuNav");
+
+menuToggle.addEventListener("click", () => {
+    menuNav.classList.toggle("active");
+});
