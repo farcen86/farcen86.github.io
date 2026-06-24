@@ -105,7 +105,81 @@ header button:hover{
 }
 
 /* =====================================
-   SLIDER
+   MENU RESPONSIVO
+===================================== */
+
+.menu{
+  position: relative;
+  margin: 20px 10px;
+}
+
+.menu-toggle{
+  display: none;
+  width: 100%;
+  max-width: 60px;
+  margin: 0 auto 15px;
+  background: blue;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.menu-nav{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  list-style: none;
+}
+
+.menu-nav li a{
+  text-decoration: none;
+  color: #514E4F;
+  font-weight: 500;
+}
+
+.menu-nav li{
+  padding: 10px 16px;
+  border-radius: 999px;
+  transition: .3s;
+}
+
+.menu-nav li:hover{
+  border: 1px solid rgb(107,107,107);
+}
+
+@media(max-width:768px){
+
+.menu-toggle{
+  display: block;
+}
+
+.menu-nav{
+  display: none;
+  flex-direction: column;
+  width: 100%;
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,.1);
+}
+
+.menu-nav.active{
+  display: flex;
+}
+
+.menu-nav li{
+  text-align: center;
+  border-bottom: 1px solid #eee;
+  padding: 15px;
+}
+}
+
+/* =====================================
+  SLIDER
 ===================================== */
 
 .slider{
@@ -394,7 +468,7 @@ section h2{
 }
 
 /* =====================================
-    FOOTER PREMIUM
+    FOOTER
 ===================================== */
 
 footer{
