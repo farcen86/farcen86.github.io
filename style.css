@@ -1,0 +1,250 @@
+/*==Reset universal==*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/*==Logo==*/
+.logo{
+  padding: 4px;
+  object-fit: cover;
+  width: 35px;
+  height: 35px;
+  display: flex;
+
+}
+
+/*==Cabeçalho==*/
+header{
+  display: flex;
+  font-family: 'inter', system-ui, sans-serif;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+header p{
+  margin-left: 738px;
+  font-size: 12px;
+  margin-bottom: -4px;
+}
+
+header button{
+  margin-left: 720px;
+}
+
+h1{
+  font-size: 24px;
+  color: blue;
+  gap: 32px;
+}
+
+/*==Titulo Colorido==*/
+.destaque{
+  color: red;
+}
+
+main{
+  align-items: center;
+}
+
+.menu ul{
+  display: flex;
+  list-style-type: none;
+  gap: 82px;
+  flex-wrap: wrap;  
+  transition: all 0.3s ease;
+}
+
+.menu li:hover{
+  border: 1px solid rgb(107, 107, 107);
+  border-radius: 999px;
+  transform: scale(1.02);
+  background: linear-gradient(to right, red 44%, yellow 56%);
+  color: black;
+  font-weight: 700;
+}
+
+.menu li{
+  margin-left: 72px;
+  color: #514E4F;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 18px;
+}
+
+/* ==Ofertas== */
+.ofertas{
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ofertas article {
+  background: white;
+  flex: 1;
+  min-width: 120px;
+  border: 1px solid rgb(230,230,230);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+h2{
+  font-size: 28px;
+}
+
+.ofertas img{
+  height: 120px;
+  width: 120px;
+  margin-left: 32px;
+}
+
+.ofertas article h3{
+  font-size: 22px;
+  padding: 14px 16px 4px 16px;
+}
+
+.ofertas article h4{
+  font-size: 16px;
+  padding: 12px;
+  color: rgb(107, 107, 107);
+}
+
+.valor-real{
+  color: rgb(107, 107, 107);
+  text-decoration: line-through;
+  font: inherit;
+  padding: 56px 0 0 10px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.valor-desc{
+  color: black;
+  font-size: 24px;
+  padding: 0 0 0 12px;
+  font-weight: 700;
+}
+
+.ofertas article a{
+  margin: 34px 16px 16px 12px;
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+}
+.ofertas article a:hover {
+  text-decoration: underline;
+}
+
+/* Sldies */
+.slider{
+  margin: 0 auto;
+  width: 1280px;
+  height: 400px;
+  overflow: hidden;
+}
+
+.slides{
+  width: 800%;
+  height: 200px;
+  display: flex;
+}
+
+.slides input{
+  display: none;
+}
+
+.slide{
+  width: 25%;
+  position: relative;
+  transition: 1s;
+}
+
+.slide img{
+  margin-top: 10px;
+  width: 1280px;
+  border-radius: 10px;
+}
+
+/*botões de navegação manual*/
+
+.manual-nav{
+  position: absolute;
+  width: 1280px;
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+}
+
+.manual-btn{
+  margin-left: 5px;
+  border: 2px solid #fff;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s;
+}
+
+/*passar o mouse por cima dos botões de navegação eles ficam preenchido de preto*/
+
+.manual-btn:hover{
+  background-color: black;
+}
+
+/*posicionamento dos slides dentro do menu de navegação e ajuste de posição*/
+
+#radio1:checked ~ .first{
+  margin-left: 0;
+}
+
+#radio2:checked ~ .first{
+  margin-left: -25%;
+}
+
+#radio3:checked ~ .first{
+  margin-left: -50%;
+}
+
+#radio4:checked ~ .first{
+  margin-left: -75%;
+}
+
+/*botoes de navegação automatico (estes estão escondido atrás dos botoes manuais)*/
+
+.naveg-auto div{
+  border: 2px solid #20a6ff;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 1s;
+  margin-left: 5px;
+}
+
+.naveg-auto{
+  position: absolute;
+  width: 1280px;
+  margin-top: 280px;
+  display: flex;
+  justify-content: center;
+}
+
+/*manter o botoes de navegacao slide preenchidos de preto quando ativo */
+
+#radio1:checked ~ .naveg-auto .auto-btn1{
+  background-color: black;
+}
+
+#radio2:checked ~ .naveg-auto .auto-btn2{
+  background-color: black;
+}
+
+#radio3:checked ~ .naveg-auto .auto-btn3{
+  background-color: black;
+}
+
+#radio4:checked ~ .naveg-auto .auto-btn4{
+  background-color: black;
+}
