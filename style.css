@@ -68,11 +68,6 @@ header p{
 /* =====================================
    MENU
 ===================================== */
-
-.menu{
-  margin: 20px 10px;
-}
-
 .menu ul{
   display: flex;
   justify-content: center;
