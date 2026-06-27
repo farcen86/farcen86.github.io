@@ -36,12 +36,9 @@ header{
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-
   padding: 15px 20px;
-
   border: 1px solid #e2e8f0;
   border-radius: 12px;
-
   margin: 10px;
   gap: 15px;
 }
@@ -98,79 +95,139 @@ header p{
 }
 
 /* =====================================
-   MENU RESPONSIVO
+   MENU RESPONSIVO — HAMBURGER
 ===================================== */
-
-.menu{
+ 
+.menu {
   position: relative;
   margin: 20px 10px;
 }
-
-.menu-toggle{
+ 
+/* Botão hamburguer — oculto no desktop */
+.menu-toggle {
   display: none;
-  width: 100%;
-  max-width: 60px;
+  width: 48px;
+  height: 48px;
   margin: 0 auto 15px;
-  background: blue;
+  background: #0033cc;
   color: white;
   border: none;
-  border-radius: 8px;
-  padding: 12px;
+  border-radius: 10px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 20px;
+ 
+  /* Centraliza o ícone */
+  align-items: center;
+  justify-content: center;
+ 
+  transition: background 0.3s;
 }
-
-.menu-nav{
+ 
+.menu-toggle:hover {
+  background: #0026a3;
+}
+ 
+/* Transição suave do ícone ☰ → ✕ */
+.menu-toggle i {
+  transition: transform 0.3s ease;
+}
+ 
+.menu-toggle.aberto i {
+  transform: rotate(90deg);
+}
+ 
+/* Lista de links — visível no desktop */
+.menu-nav {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   gap: 15px;
   list-style: none;
 }
-
-.menu-nav li a{
+ 
+.menu-nav li a {
   text-decoration: none;
   color: #514E4F;
   font-weight: 500;
 }
-
-.menu-nav li{
+ 
+.menu-nav li {
   padding: 10px 16px;
   border-radius: 999px;
-  transition: .3s;
+  transition: 0.3s;
 }
-
-.menu-nav li:hover{
-  border: 1px solid rgb(107,107,107);
+ 
+.menu-nav li:hover {
+  border: 1px solid rgb(107, 107, 107);
 }
-
-@media(max-width:768px){
-
-.menu-toggle{
-  display: block;
+ 
+/* ======================================
+   COMPORTAMENTO MOBILE (até 768px)
+====================================== */
+ 
+@media (max-width: 768px) {
+ 
+  /* Mostra o botão hamburguer */
+  .menu-toggle {
+    display: flex;
+  }
+ 
+  /* Esconde a lista por padrão */
+  .menu-nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+    border: 1px solid #e5e7eb;
+  }
+ 
+  /* Mostra a lista quando tem a classe .active */
+  .menu-nav.active {
+    display: flex;
+ 
+    /* Animação de entrada suave */
+    animation: slideDown 0.25s ease;
+  }
+ 
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+ 
+  /* Itens da lista no mobile */
+  .menu-nav li {
+    text-align: center;
+    border-radius: 8px;
+    border-bottom: 1px solid #f0f0f0;
+    padding: 14px;
+    width: 100%;
+  }
+ 
+  .menu-nav li:last-child {
+    border-bottom: none;
+  }
+ 
+  .menu-nav li:hover {
+    background: #f5f8ff;
+    border: none;
+    border-bottom: 1px solid #f0f0f0;
+  }
+ 
+  .menu-nav li a {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+  }
 }
-
-.menu-nav{
-  display: none;
-  flex-direction: column;
-  width: 100%;
-  background: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,.1);
-}
-
-.menu-nav.active{
-  display: flex;
-}
-
-.menu-nav li{
-  text-align: center;
-  border-bottom: 1px solid #eee;
-  padding: 15px;
-}
-}
-
 /* =====================================
   SLIDER
 ===================================== */
@@ -203,48 +260,6 @@ header p{
   border-radius: 12px;
 }
 
-/* Navegação manual */
-
-.manual-nav{
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-}
-
-.manual-btn{
-  border: 2px solid white;
-  padding: 6px;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: .3s;
-  margin: 0 5px;
-}
-
-.manual-btn:hover{
-  background: white;
-}
-
-/* Navegação automática */
-
-.naveg-auto{
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-
-  display: flex;
-  justify-content: center;
-}
-
-.naveg-auto div{
-  border: 2px solid #20a6ff;
-  padding: 6px;
-  border-radius: 50%;
-  margin: 0 5px;
-}
-
 /* Movimento dos slides */
 
 #radio1:checked ~ .first{
@@ -261,22 +276,6 @@ header p{
 
 #radio4:checked ~ .first{
   margin-left: -75%;
-}
-
-#radio1:checked ~ .naveg-auto .auto-btn1{
-  background: white;
-}
-
-#radio2:checked ~ .naveg-auto .auto-btn2{
-  background: white;
-}
-
-#radio3:checked ~ .naveg-auto .auto-btn3{
-  background: white;
-}
-
-#radio4:checked ~ .naveg-auto .auto-btn4{
-  background: white;
 }
 
 /* =====================================
