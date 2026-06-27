@@ -24,6 +24,13 @@ img{
    CABEÇALHO
 ===================================== */
 
+
+.logo-container{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
 header{
   display: flex;
   justify-content: space-between;
@@ -57,22 +64,9 @@ h1{
 header p{
   font-size: 14px;
   margin-bottom: -1px;
-  margin-left: 24px;
+  margin-left: 12px;
 }
 
-header button{
-  border: none;
-  background: blue;
-  color: white;
-  padding: 10px 18px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: .3s;
-}
-
-header button:hover{
-  opacity: .9;
-}
 
 /* =====================================
    MENU
@@ -101,7 +95,6 @@ header button:hover{
 .menu li:hover{
   border: 1px solid rgb(107,107,107);
   color: black;
-  font-weight: 700;
 }
 
 /* =====================================
@@ -636,3 +629,231 @@ footer{
     aspect-ratio:16/9;
   }
 }
+
+
+      /* ==============================
+         PÁGINA DE CONTATO
+      ============================== */
+
+      .contato-section {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 0 20px 60px;
+      }
+
+      .contato-section h2 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 8px;
+        color: #0033cc;
+      }
+
+      .contato-section .subtitulo {
+        text-align: center;
+        color: #666;
+        margin-bottom: 35px;
+        font-size: 15px;
+      }
+
+      /* Card do formulário */
+      .form-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 35px 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      /* Grupos de campo */
+      .campo-grupo {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      .campo-grupo label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 6px;
+      }
+
+      .campo-grupo label span.obrigatorio {
+        color: red;
+        margin-left: 2px;
+      }
+
+      /* Inputs e textarea */
+      .campo-grupo input,
+      .campo-grupo select,
+      .campo-grupo textarea {
+        padding: 12px 14px;
+        border: 1.5px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: Inter, system-ui, sans-serif;
+        transition: border-color 0.3s;
+        outline: none;
+        background: #fafafa;
+      }
+
+      .campo-grupo input:focus,
+      .campo-grupo select:focus,
+      .campo-grupo textarea:focus {
+        border-color: #0052ff;
+        background: #fff;
+      }
+
+      /* Estado de erro */
+      .campo-grupo input.erro,
+      .campo-grupo select.erro,
+      .campo-grupo textarea.erro {
+        border-color: #e53e3e;
+        background: #fff5f5;
+      }
+
+      /* Estado de sucesso */
+      .campo-grupo input.sucesso,
+      .campo-grupo select.sucesso,
+      .campo-grupo textarea.sucesso {
+        border-color: #38a169;
+        background: #f0fff4;
+      }
+
+      .campo-grupo textarea {
+        resize: vertical;
+        min-height: 130px;
+      }
+
+      /* Mensagem de erro */
+      .msg-erro {
+        color: #e53e3e;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .msg-erro.visivel {
+        display: block;
+      }
+
+      /* Campos lado a lado */
+      .campos-linha {
+        display: flex;
+        gap: 20px;
+      }
+
+      .campos-linha .campo-grupo {
+        flex: 1;
+      }
+
+      /* Botão enviar */
+      .btn-enviar {
+        width: 100%;
+        padding: 14px;
+        background: #0033cc;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        margin-top: 10px;
+      }
+
+      .btn-enviar:hover {
+        background: #0026a3;
+        transform: translateY(-1px);
+      }
+
+      .btn-enviar:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Alerta de sucesso após envio */
+      .alerta-sucesso {
+        display: none;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      .alerta-sucesso.visivel {
+        display: block;
+      }
+
+      .alerta-sucesso i {
+        font-size: 60px;
+        color: #38a169;
+        margin-bottom: 15px;
+      }
+
+      .alerta-sucesso h3 {
+        font-size: 22px;
+        color: #1a202c;
+        margin-bottom: 8px;
+      }
+
+      .alerta-sucesso p {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .btn-voltar {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #0033cc;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.3s;
+      }
+
+      .btn-voltar:hover {
+        opacity: 0.9;
+      }
+
+      /* Contador de caracteres */
+      .contador {
+        text-align: right;
+        font-size: 12px;
+        color: #999;
+        margin-top: 4px;
+      }
+
+      /* Info de contato abaixo do form */
+      .info-contato {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 35px;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #555;
+        font-size: 14px;
+      }
+
+      .info-item i {
+        color: #0033cc;
+        font-size: 16px;
+      }
+
+      /* Responsivo */
+      @media (max-width: 600px) {
+        .form-card {
+          padding: 25px 20px;
+        }
+
+        .campos-linha {
+          flex-direction: column;
+          gap: 0;
+        }
+      }

@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato — Farmácia Central</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Entre em contato com a Farmácia Central de São José do Rio Claro/MT. Envie sua mensagem, dúvida ou solicitação.">
+    <meta name="robots" content="index, follow">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script src="./script.js"></script>
+    <style>
+      /* ==============================
+         PÁGINA DE CONTATO
+      ============================== */
+
+      .contato-section {
+        max-width: 700px;
+        margin: 50px auto;
+        padding: 0 20px 60px;
+      }
+
+      .contato-section h2 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 8px;
+        color: #0033cc;
+      }
+
+      .contato-section .subtitulo {
+        text-align: center;
+        color: #666;
+        margin-bottom: 35px;
+        font-size: 15px;
+      }
+
+      /* Card do formulário */
+      .form-card {
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 35px 40px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+      }
+
+      /* Grupos de campo */
+      .campo-grupo {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+
+      .campo-grupo label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 6px;
+      }
+
+      .campo-grupo label span.obrigatorio {
+        color: red;
+        margin-left: 2px;
+      }
+
+      /* Inputs e textarea */
+      .campo-grupo input,
+      .campo-grupo select,
+      .campo-grupo textarea {
+        padding: 12px 14px;
+        border: 1.5px solid #d1d5db;
+        border-radius: 8px;
+        font-size: 15px;
+        font-family: Inter, system-ui, sans-serif;
+        transition: border-color 0.3s;
+        outline: none;
+        background: #fafafa;
+      }
+
+      .campo-grupo input:focus,
+      .campo-grupo select:focus,
+      .campo-grupo textarea:focus {
+        border-color: #0052ff;
+        background: #fff;
+      }
+
+      /* Estado de erro */
+      .campo-grupo input.erro,
+      .campo-grupo select.erro,
+      .campo-grupo textarea.erro {
+        border-color: #e53e3e;
+        background: #fff5f5;
+      }
+
+      /* Estado de sucesso */
+      .campo-grupo input.sucesso,
+      .campo-grupo select.sucesso,
+      .campo-grupo textarea.sucesso {
+        border-color: #38a169;
+        background: #f0fff4;
+      }
+
+      .campo-grupo textarea {
+        resize: vertical;
+        min-height: 130px;
+      }
+
+      /* Mensagem de erro */
+      .msg-erro {
+        color: #e53e3e;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+      }
+
+      .msg-erro.visivel {
+        display: block;
+      }
+
+      /* Campos lado a lado */
+      .campos-linha {
+        display: flex;
+        gap: 20px;
+      }
+
+      .campos-linha .campo-grupo {
+        flex: 1;
+      }
+
+      /* Botão enviar */
+      .btn-enviar {
+        width: 100%;
+        padding: 14px;
+        background: #0033cc;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        margin-top: 10px;
+      }
+
+      .btn-enviar:hover {
+        background: #0026a3;
+        transform: translateY(-1px);
+      }
+
+      .btn-enviar:disabled {
+        background: #94a3b8;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Alerta de sucesso após envio */
+      .alerta-sucesso {
+        display: none;
+        text-align: center;
+        padding: 30px 20px;
+      }
+
+      .alerta-sucesso.visivel {
+        display: block;
+      }
+
+      .alerta-sucesso i {
+        font-size: 60px;
+        color: #38a169;
+        margin-bottom: 15px;
+      }
+
+      .alerta-sucesso h3 {
+        font-size: 22px;
+        color: #1a202c;
+        margin-bottom: 8px;
+      }
+
+      .alerta-sucesso p {
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .btn-voltar {
+        display: inline-block;
+        padding: 12px 24px;
+        background: #0033cc;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: opacity 0.3s;
+      }
+
+      .btn-voltar:hover {
+        opacity: 0.9;
+      }
+
+      /* Contador de caracteres */
+      .contador {
+        text-align: right;
+        font-size: 12px;
+        color: #999;
+        margin-top: 4px;
+      }
+
+      /* Info de contato abaixo do form */
+      .info-contato {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        margin-top: 35px;
+      }
+
+      .info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: #555;
+        font-size: 14px;
+      }
+
+      .info-item i {
+        color: #0033cc;
+        font-size: 16px;
+      }
+
+      /* Responsivo */
+      @media (max-width: 600px) {
+        .form-card {
+          padding: 25px 20px;
+        }
+
+        .campos-linha {
+          flex-direction: column;
+          gap: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img class="logo" src="./Logo.png" alt="Logo Farmácia Central">
+        <h1>Farmácia <span class="destaque">Central</span></h1>
+      </div>
+
+      <div>
+        <p>Seja Bem-vindo!</p>
+      </div>
+    </header>
+    <section class="menu">
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+
+      <nav>
+        <ul class="menu-nav" id="menuNav">
+          <li><a href="index.html">Início</a></li>
+          <li><a href="#">Ofertas</a></li>
+          <li><a href="#">Perfumaria</a></li>
+          <li><a href="#">Fraldas</a></li>
+          <li><a href="./contato.html" style="color:#0033cc; font-weight:700;">Contato</a></li>
+        </ul>
+      </nav>
+    </section>
+    <main>
+      <section class="contato-section">
+
+        <h2>Fale Conosco</h2>
+        <p class="subtitulo">Preencha o formulário abaixo e entraremos em contato em breve.</p>
+
+        <div class="form-card">
+
+          <!-- Formulário — aparece por padrão -->
+          <form id="contatoForm" novalidate>
+
+            <!-- Nome e Telefone lado a lado -->
+            <div class="campos-linha">
+
+              <div class="campo-grupo">
+                <label for="nome">
+                  Nome completo <span class="obrigatorio">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="nome"
+                  placeholder="Ex.: João da Silva"
+                  maxlength="80"
+                >
+                <span class="msg-erro" id="erro-nome">
+                  <i class="fas fa-exclamation-circle"></i>
+                  Informe seu nome (mínimo 3 caracteres).
+                </span>
+              </div>
+
+              <div class="campo-grupo">
+                <label for="telefone">
+                  Telefone / WhatsApp <span class="obrigatorio">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="telefone"
+                  placeholder="(65) 9 9999-9999"
+                  maxlength="16"
+                >
+                <span class="msg-erro" id="erro-telefone">
+                  <i class="fas fa-exclamation-circle"></i>
+                  Informe um telefone válido.
+                </span>
+              </div>
+
+            </div>
+
+            <!-- E-mail -->
+            <div class="campo-grupo">
+              <label for="email">
+                E-mail <span class="obrigatorio">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                placeholder="seuemail@exemplo.com"
+              >
+              <span class="msg-erro" id="erro-email">
+                <i class="fas fa-exclamation-circle"></i>
+                Informe um e-mail válido.
+              </span>
+            </div>
+
+            <!-- Assunto -->
+            <div class="campo-grupo">
+              <label for="assunto">
+                Assunto <span class="obrigatorio">*</span>
+              </label>
+              <select id="assunto">
+                <option value="">— Selecione um assunto —</option>
+                <option value="duvida">Dúvida sobre produto</option>
+                <option value="preco">Consulta de preço</option>
+                <option value="entrega">Entrega / Delivery</option>
+                <option value="reclamacao">Reclamação</option>
+                <option value="elogio">Elogio</option>
+                <option value="outro">Outro</option>
+              </select>
+              <span class="msg-erro" id="erro-assunto">
+                <i class="fas fa-exclamation-circle"></i>
+                Selecione um assunto.
+              </span>
+            </div>
+
+            <!-- Mensagem -->
+            <div class="campo-grupo">
+              <label for="mensagem">
+                Mensagem <span class="obrigatorio">*</span>
+              </label>
+              <textarea
+                id="mensagem"
+                placeholder="Escreva sua mensagem aqui..."
+                maxlength="500"
+              ></textarea>
+              <span class="contador" id="contador-chars">0 / 500 caracteres</span>
+              <span class="msg-erro" id="erro-mensagem">
+                <i class="fas fa-exclamation-circle"></i>
+                A mensagem deve ter ao menos 20 caracteres.
+              </span>
+            </div>
+
+            <button type="submit" class="btn-enviar" id="btnEnviar">
+              <i class="fas fa-paper-plane"></i>
+              Enviar Mensagem
+            </button>
+
+          </form>
+
+          <!-- Mensagem de sucesso — oculta por padrão -->
+          <div class="alerta-sucesso" id="alertaSucesso">
+            <i class="fas fa-check-circle"></i>
+            <h3>Mensagem enviada com sucesso!</h3>
+            <p>Em breve nossa equipe entrará em contato com você.</p>
+            <a href="index.html" class="btn-voltar">
+              <i class="fas fa-arrow-left"></i>
+              Voltar para o inicio
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Informações rápidas de contato -->
+        <div class="info-contato">
+          <div class="info-item">
+            <i class="fab fa-whatsapp"></i>
+            (65) 9 9211-7716
+          </div>
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            farcen86@gmail.com
+          </div>
+          <div class="info-item">
+            <i class="fas fa-map-marker-alt"></i>
+            Av. Mato Grosso, 724 — Centro
+          </div>
+        </div>
+
+      </section>
+    </main>
+    <footer>
+      <div class="footer-container">
+
+        <div class="footer-coluna">
+          <h3>Farmácia Central</h3>
+          <p>Cuidando da sua saúde com qualidade e economia.</p>
+          <div class="redes-sociais">
+            <a href="https://wa.me/5565992117716" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+            <a href="https://www.instagram.com/farmaciacentralsjrc" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.google.com/maps/place/Farm%C3%A1cia+Central" target="_blank">
+              <i class="fas fa-location-dot"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-coluna">
+          <h3>Contato</h3>
+          <p><i class="fab fa-whatsapp"></i> (65) 9 9211-7716</p>
+          <p><i class="fas fa-envelope"></i> farcen86@gmail.com</p>
+        </div>
+
+        <div class="footer-coluna">
+          <h3>Endereço</h3>
+          <p>Av. Mato Grosso, 724</p>
+          <p>Centro - São José do Rio Claro/MT</p>
+          <a class="btn-mapa" href="https://www.google.com/maps/place/Farm%C3%A1cia+Central" target="_blank">
+            Ver no Google Maps
+          </a>
+        </div>
+
+        <div class="footer-coluna">
+          <h3>Horário</h3>
+          <p>Segunda a Sexta</p>
+          <p>07h às 19h</p>
+          <p>Sábados e Feriados</p>
+          <p>07h às 18h</p>
+        </div>
+
+      </div>
+      <div class="footer-copy">
+        © 2026 Farmácia Central - Todos os direitos reservados.
+      </div>
+    </footer>
+
+    <!-- ========================
+         JAVASCRIPT
+    ======================== -->
+    <script>
+      // ============================================
+      // 1. MENU MOBILE
+      // ============================================
+      document.addEventListener("DOMContentLoaded", () => {
+
+        const menuToggle = document.getElementById("menuToggle");
+        const menuNav    = document.getElementById("menuNav");
+
+        menuToggle.addEventListener("click", () => {
+          menuNav.classList.toggle("active");
+        });
+
+        // Fecha o menu ao clicar num link (mobile)
+        menuNav.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            menuNav.classList.remove("active");
+          });
+        });
+
+        // ============================================
+        // 3. CONTADOR DE CARACTERES DA MENSAGEM
+        // ============================================
+        const mensagemInput  = document.getElementById("mensagem");
+        const contadorChars  = document.getElementById("contador-chars");
+
+        mensagemInput.addEventListener("input", () => {
+          const total = mensagemInput.value.length;
+          contadorChars.textContent = `${total} / 500 caracteres`;
+
+          // Muda cor quando está perto do limite
+          contadorChars.style.color = total >= 450 ? "#e53e3e" : "#999";
+        });
+
+        // ============================================
+        // 4. MÁSCARA DE TELEFONE
+        // ============================================
+        const telefoneInput = document.getElementById("telefone");
+
+        telefoneInput.addEventListener("input", () => {
+          // Remove tudo que não for número
+          let val = telefoneInput.value.replace(/\D/g, "");
+
+          // Aplica a máscara: (65) 9 9999-9999
+          if (val.length <= 2) {
+            val = val.replace(/(\d{0,2})/, "($1");
+          } else if (val.length <= 3) {
+            val = val.replace(/(\d{2})(\d{0,1})/, "($1) $2");
+          } else if (val.length <= 7) {
+            val = val.replace(/(\d{2})(\d{1})(\d{0,4})/, "($1) $2 $3");
+          } else {
+            val = val.replace(/(\d{2})(\d{1})(\d{4})(\d{0,4})/, "($1) $2 $3-$4");
+          }
+
+          telefoneInput.value = val;
+        });
+
+        // ============================================
+        // 5. VALIDAÇÃO DO FORMULÁRIO DE CONTATO
+        // ============================================
+
+        // Funções auxiliares de validação
+        function mostrarErro(campoId, erroId) {
+          const campo = document.getElementById(campoId);
+          const erro  = document.getElementById(erroId);
+
+          campo.classList.add("erro");
+          campo.classList.remove("sucesso");
+          erro.classList.add("visivel");
+        }
+
+        function mostrarSucesso(campoId, erroId) {
+          const campo = document.getElementById(campoId);
+          const erro  = document.getElementById(erroId);
+
+          campo.classList.remove("erro");
+          campo.classList.add("sucesso");
+          erro.classList.remove("visivel");
+        }
+
+        function limparStatus(campoId, erroId) {
+          const campo = document.getElementById(campoId);
+          const erro  = document.getElementById(erroId);
+
+          campo.classList.remove("erro", "sucesso");
+          erro.classList.remove("visivel");
+        }
+
+        // Validação em tempo real enquanto o usuário digita
+        document.getElementById("nome").addEventListener("blur", () => {
+          const val = document.getElementById("nome").value.trim();
+          val.length >= 3
+            ? mostrarSucesso("nome", "erro-nome")
+            : mostrarErro("nome", "erro-nome");
+        });
+
+        document.getElementById("email").addEventListener("blur", () => {
+          const val   = document.getElementById("email").value.trim();
+          const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          regex.test(val)
+            ? mostrarSucesso("email", "erro-email")
+            : mostrarErro("email", "erro-email");
+        });
+
+        document.getElementById("telefone").addEventListener("blur", () => {
+          const val = document.getElementById("telefone").value.replace(/\D/g, "");
+          val.length >= 10
+            ? mostrarSucesso("telefone", "erro-telefone")
+            : mostrarErro("telefone", "erro-telefone");
+        });
+
+        document.getElementById("assunto").addEventListener("change", () => {
+          const val = document.getElementById("assunto").value;
+          val !== ""
+            ? mostrarSucesso("assunto", "erro-assunto")
+            : mostrarErro("assunto", "erro-assunto");
+        });
+
+        document.getElementById("mensagem").addEventListener("blur", () => {
+          const val = document.getElementById("mensagem").value.trim();
+          val.length >= 20
+            ? mostrarSucesso("mensagem", "erro-mensagem")
+            : mostrarErro("mensagem", "erro-mensagem");
+        });
+
+        // Validação final ao submeter
+        document.getElementById("contatoForm").addEventListener("submit", (e) => {
+          e.preventDefault(); // Impede o envio padrão do navegador
+
+          const nome     = document.getElementById("nome").value.trim();
+          const email    = document.getElementById("email").value.trim();
+          const telefone = document.getElementById("telefone").value.replace(/\D/g, "");
+          const assunto  = document.getElementById("assunto").value;
+          const mensagem = document.getElementById("mensagem").value.trim();
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+          let formValido = true; // Controla se tudo está correto
+
+          // Valida nome
+          if (nome.length < 3) {
+            mostrarErro("nome", "erro-nome");
+            formValido = false;
+          } else {
+            mostrarSucesso("nome", "erro-nome");
+          }
+
+          // Valida e-mail
+          if (!emailRegex.test(email)) {
+            mostrarErro("email", "erro-email");
+            formValido = false;
+          } else {
+            mostrarSucesso("email", "erro-email");
+          }
+
+          // Valida telefone
+          if (telefone.length < 10) {
+            mostrarErro("telefone", "erro-telefone");
+            formValido = false;
+          } else {
+            mostrarSucesso("telefone", "erro-telefone");
+          }
+
+          // Valida assunto
+          if (assunto === "") {
+            mostrarErro("assunto", "erro-assunto");
+            formValido = false;
+          } else {
+            mostrarSucesso("assunto", "erro-assunto");
+          }
+
+          // Valida mensagem
+          if (mensagem.length < 20) {
+            mostrarErro("mensagem", "erro-mensagem");
+            formValido = false;
+          } else {
+            mostrarSucesso("mensagem", "erro-mensagem");
+          }
+
+          // Se tudo válido: exibe mensagem de sucesso
+          if (formValido) {
+            const btnEnviar = document.getElementById("btnEnviar");
+            btnEnviar.disabled    = true;
+            btnEnviar.textContent = "Enviando...";
+
+            // Simula um pequeno delay de envio (como uma requisição real)
+            setTimeout(() => {
+              document.getElementById("contatoForm").style.display  = "none";
+              document.getElementById("alertaSucesso").classList.add("visivel");
+            }, 1200);
+          }
+
+        });
+
+      }); // fim DOMContentLoaded
+
+      // **==== Por algum motivo eu escrevi isto tudo no arquivo JS e ele não funcionou como deveria.
+      // **==== Por Este motivo resolvi deixa-lo aqui mesmo.
+    </script>
+
+  </body>
+</html>
