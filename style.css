@@ -57,7 +57,7 @@ h1{
 header p{
   font-size: 14px;
   margin-bottom: -1px;
-  margin-left: 26px;
+  margin-left: 24px;
 }
 
 header button{
@@ -572,56 +572,67 @@ footer{
   opacity: .9;
 }
 
-/* =====================================
-   WHATSAPP FLUTUANTE
-===================================== */
+/* ====================================
+   MENU
+==================================== */
 
-.whatsapp-float{
-  position: fixed;
-
-  right: 20px;
-  bottom: 20px;
-
-  width: 65px;
-  height: 65px;
-
-  background: #25d366;
-  color: white;
-
-  border-radius: 50%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  font-size: 34px;
-
-  text-decoration: none;
-
-  box-shadow: 0 5px 15px rgba(0,0,0,.3);
-
-  z-index: 9999;
-
-  transition: .3s;
+.menu-nav a{
+  text-decoration:none;
+  color:#444;
+  font-weight:600;
 }
 
-.whatsapp-float:hover{
-  transform: scale(1.1);
+.menu-nav a:hover{
+  color:#0052ff;
 }
 
-/* =====================================
-   MOBILE
-===================================== */
+
+/* ====================================
+   MELHORIAS DOS CARDS
+==================================== */
+
+.ofertas article{
+  min-height:500px;
+}
+
+.ofertas article a{
+  margin-top:auto;
+}
+
+/* ====================================
+   SLIDER
+==================================== */
+
+.slider{
+  aspect-ratio:16/6;
+}
+
+.slide img{
+  height:100%;
+  object-fit:cover;
+}
+
+/* ====================================
+   RESPONSIVIDADE
+==================================== */
 
 @media(max-width:768px){
 
-  .footer-container{
-    flex-direction: column;
-    text-align: center;
+  header{
+    flex-direction:column;
+    text-align:center;
   }
 
-  .redes-sociais{
-    justify-content: center;
+  .logo-container{
+    flex-direction:column;
   }
 
+  .btn-login{
+    width:100%;
+    max-width:300px;
+  }
+
+  .slider{
+    aspect-ratio:16/9;
+  }
 }
