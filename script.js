@@ -1,20 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  /* ==========================
-     MENU MOBILE (HAMBURGER)
-  ========================== */
-
+  // ==========================
+  // MENU MOBILE (HAMBURGER)
+  // ==========================
   const menuToggle = document.getElementById("menuToggle");
-  const menuNav    = document.getElementById("menuNav");
-  const menuIcon   = menuToggle.querySelector("i"); // o ícone <i> dentro do botão
+  const menuNav = document.getElementById("menuNav");
+  const menuIcon = menuToggle.querySelector("i");
 
-  // Abre/fecha ao clicar no botão hamburguer
   menuToggle.addEventListener("click", (e) => {
-    e.stopPropagation(); // impede que o clique "vaze" para o document
-
+    e.stopPropagation();
     const estaAberto = menuNav.classList.toggle("active");
-
-    // Troca o ícone: ☰ barras → ✕ fechar
     if (estaAberto) {
       menuIcon.classList.remove("fa-bars");
       menuIcon.classList.add("fa-times");
@@ -24,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Fecha o menu ao clicar em qualquer link da lista
-  menuNav.querySelectorAll("a").forEach((link) => {
+  // Fecha ao clicar em link
+  menuNav.querySelectorAll("a").forEach(link => {
     link.addEventListener("click", () => {
       menuNav.classList.remove("active");
       menuIcon.classList.remove("fa-times");
@@ -33,99 +28,63 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Fecha o menu ao clicar FORA dele
+  // Fecha ao clicar fora
   document.addEventListener("click", (e) => {
-    const clicouForaDoMenu = !e.target.closest(".menu");
-
-    if (clicouForaDoMenu) {
+    if (!e.target.closest(".menu")) {
       menuNav.classList.remove("active");
       menuIcon.classList.remove("fa-times");
       menuIcon.classList.add("fa-bars");
     }
   });
 
-  /* ==========================
-     SLIDER AUTOMÁTICO
-  ========================== */
-
-  // Só executa o slider se os elementos existirem na página
-const radio1 = document.getElementById("radio1");
-if (radio1) {
-  radio1.checked = true;
-}
-
-  let count = 1;
-  document.getElementById("radio1").checked = true;
-
-  setInterval(() => {
-    nextImage();
-  }, 5000);
-
-  function nextImage() {
-    count++;
-    if (count > 4) count = 1;
-    document.getElementById("radio" + count).checked = true;
+  // ==========================
+  // SLIDER (se existir)
+  // ==========================
+  const radio1 = document.getElementById("radio1");
+  if (radio1) {
+    let count = 1;
+    radio1.checked = true;
+    setInterval(() => {
+      count = (count % 4) + 1;
+      document.getElementById("radio" + count).checked = true;
+    }, 5000);
   }
-}); // fim do DOMContentLoaded
 
-      // ============================================
-      // 1. MENU MOBILE
-      // ============================================
-      document.addEventListener("DOMContentLoaded", () => {
+  // ==========================
+  // CONTADOR DE CARACTERES
+  // ==========================
+  const mensagemInput = document.getElementById("mensagem");
+  const contadorChars = document.getElementById("contador-chars");
+  if (mensagemInput && contadorChars) {
+    mensagemInput.addEventListener("input", () => {
+      const total = mensagemInput.value.length;
+      contadorChars.textContent = `${total} / 500 caracteres`;
+      contadorChars.style.color = total >= 450 ? "#e53e3e" : "#999";
+    });
+  }
 
-        const menuToggle = document.getElementById("menuToggle");
-        const menuNav    = document.getElementById("menuNav");
-
-        menuToggle.addEventListener("click", () => {
-          menuNav.classList.toggle("active");
-        });
-
-        // Fecha o menu ao clicar num link (mobile)
-        menuNav.querySelectorAll("a").forEach(link => {
-          link.addEventListener("click", () => {
-            menuNav.classList.remove("active");
-          });
-        });
-
-        // ============================================
-        // 3. CONTADOR DE CARACTERES DA MENSAGEM
-        // ============================================
-        const mensagemInput  = document.getElementById("mensagem");
-        const contadorChars  = document.getElementById("contador-chars");
-
-        mensagemInput.addEventListener("input", () => {
-          const total = mensagemInput.value.length;
-          contadorChars.textContent = `${total} / 500 caracteres`;
-
-          // Muda cor quando está perto do limite
-          contadorChars.style.color = total >= 450 ? "#e53e3e" : "#999";
-        });
-
-        // ============================================
-        // 4. MÁSCARA DE TELEFONE
-        // ============================================
-        const telefoneInput = document.getElementById("telefone");
-
-        telefoneInput.addEventListener("input", () => {
-          // Remove tudo que não for número
-          let val = telefoneInput.value.replace(/\D/g, "");
-
-          // Aplica a máscara: (65) 9 9999-9999
-          if (val.length <= 2) {
-            val = val.replace(/(\d{0,2})/, "($1");
-          } else if (val.length <= 3) {
-            val = val.replace(/(\d{2})(\d{0,1})/, "($1) $2");
-          } else if (val.length <= 7) {
-            val = val.replace(/(\d{2})(\d{1})(\d{0,4})/, "($1) $2 $3");
-          } else {
-            val = val.replace(/(\d{2})(\d{1})(\d{4})(\d{0,4})/, "($1) $2 $3-$4");
-          }
-
-          telefoneInput.value = val;
-        });
+  // ==========================
+  // MÁSCARA DE TELEFONE
+  // ==========================
+  const telefoneInput = document.getElementById("telefone");
+  if (telefoneInput) {
+    telefoneInput.addEventListener("input", () => {
+      let val = telefoneInput.value.replace(/\D/g, "");
+      if (val.length <= 2) {
+        val = val.replace(/(\d{0,2})/, "($1");
+      } else if (val.length <= 3) {
+        val = val.replace(/(\d{2})(\d{0,1})/, "($1) $2");
+      } else if (val.length <= 7) {
+        val = val.replace(/(\d{2})(\d{1})(\d{0,4})/, "($1) $2 $3");
+      } else {
+        val = val.replace(/(\d{2})(\d{1})(\d{4})(\d{0,4})/, "($1) $2 $3-$4");
+      }
+      telefoneInput.value = val;
+    });
+  }
 
         // ============================================
-        // 5. VALIDAÇÃO DO FORMULÁRIO DE CONTATO
+        //  VALIDAÇÃO DO FORMULÁRIO DE CONTATO
         // ============================================
 
         // Funções auxiliares de validação
