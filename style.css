@@ -82,6 +82,7 @@ header p{
   border-radius: 999px;
   cursor: pointer;
   font-size: 16px;
+  border: 1px solid transparent;
 }
 
 .menu li:hover{
@@ -851,3 +852,78 @@ footer{
           gap: 0;
         }
       }
+
+/* =====================================
+    Vitaminas
+===================================== */
+
+.vitaminas{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+
+  padding: 0 15px 30px;
+}
+
+.vitaminas article{
+  background: white;
+
+  width: 100%;
+  max-width: 300px;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: .3s;
+}
+
+.vitaminas article:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.08);
+}
+
+.vitaminas img{
+  width: 150px;
+  height: 150px;
+  object-fit: contain;
+  margin: 15px auto;
+}
+
+.vitaminas article h3{
+  font-size: 22px;
+  padding: 10px 15px;
+}
+
+.vitaminas article h4{
+  font-size: 15px;
+  padding: 0 15px;
+  color: #666;
+  min-height: 60px;
+}
+
+.vitaminas article a{
+  margin: auto 15px 15px;
+
+  text-align: center;
+
+  text-decoration: none;
+
+  color: white;
+  background: blue;
+
+  padding: 12px;
+
+  border-radius: 8px;
+
+  transition: .3s;
+}
+
+.vitaminas article a:hover{
+  opacity: .9;
+}
